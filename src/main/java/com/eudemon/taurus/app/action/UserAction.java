@@ -1,6 +1,7 @@
 package com.eudemon.taurus.app.action;
 
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eudemon.taurus.app.common.Log;
 import com.eudemon.taurus.app.entity.User;
 import com.eudemon.taurus.app.service.UserService;
+import com.eudemon.taurus.app.util.JasonUtils;
 import com.eudemon.taurus.app.util.RequestUtils;
 
 /**
@@ -43,6 +45,20 @@ public class UserAction {
 		model.addAttribute("user", user);
 		model.addAttribute("userinfo", user == null ? "" : user.toString());
 		return "index";
+	}
+	
+	@RequestMapping(value = "list")
+	public void list(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		Log.getDebugLogger().trace("UserAction.list");
+		
+		List<User> list = null;
+		try {
+			list = this.userService.getAllUser();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		JasonUtils.writeJasonP(request, response, list);
 	}
 	
 	@RequestMapping(value = "delete")
