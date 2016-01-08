@@ -10,8 +10,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="a.css">
+    <link rel="stylesheet" href="../../static/common/base.css">
+    <link rel="stylesheet" href="list.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +40,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">
-					<li role="presentation" class="active"><a href="a.html">用户管理</a></li>
+					<li role="presentation" class="active"><a href="list.html">用户管理</a></li>
 					<li role="presentation"><a href="b.html">Profile</a></li>
 					<li role="presentation"><a href="#">Messages</a></li>
 				</ul>
@@ -48,31 +48,16 @@
 			<!-- Optional: clear the XS cols if their content doesn't match in height -->
 			<div class="clearfix visible-xs-block"></div>
 			<div class="col-md-10">
-				<form>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label> <input
-							type="email" class="form-control" id="exampleInputEmail1"
-							placeholder="Email">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label> <input
-							type="password" class="form-control" id="exampleInputPassword1"
-							placeholder="Password">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputFile">File input</label> <input
-							type="file" id="exampleInputFile">
-						<p class="help-block">Example block-level help text here.</p>
-					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox"> Check me out
-						</label>
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">用户列表</div>
+					<table class="table table-bordered"></table>
+				</div>
 			</div>
 		</div>
 	</div>
+	<br><br><br>
+
 	<div class="container-fluid navbar-fixed-bottom footer">
 		Copyright &copy; 2000 - 2015 XINHUANET.com All Rights Reserved. 制作单位：新华网 版权所有 新华网
   	</div>
@@ -81,6 +66,6 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="a.js"></script>
+    <script src="list.js"></script>
   </body>
 </html>

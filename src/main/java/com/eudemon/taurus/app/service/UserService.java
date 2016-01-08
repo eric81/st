@@ -48,6 +48,15 @@ public class UserService {
 		return userDao.delete(id);
 	}
 
+	public User getUserById(int id) {
+		User user = null;
+		try {
+			user = userDao.query(id);
+		} catch (EmptyResultDataAccessException e) {
+		}
+		return user;
+	}
+	
 	public User getUserByName(String name) {
 		User user = null;
 		try {

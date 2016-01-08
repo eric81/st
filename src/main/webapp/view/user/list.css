@@ -19,13 +19,11 @@
 }
 
 .footer {
+	color: #fff;
+	background: #00aae7;
+	line-height: 64px;
     font-size: 14px;
-    height: 64px;
-    line-height: 64px;
-    width: 100%;
-    background: #00aae7;
     text-align: center;
-    color: #fff;
 }
 
 .content{

@@ -17,7 +17,7 @@ function userlist(){
             $(".table").html("");
             $(".table").append("<tr><td>用户</td><td>角色</td><td>权限</td><td>注册日期</td></tr>");
             $.each(data, function(index, user) {
-                $(".table").append("<tr><td>" + user.name + "</td><td>" + user.roles + "</td><td>" + user.permissions + "</td><td>" + formatTime(user.registerDate) + "</td></tr>");
+                $(".table").append("<tr><td><a href='detail.html?id=" + user.id + "'>" + user.name + "</a></td><td>" + user.roles + "</td><td>" + user.permissions + "</td><td>" + formatTime(user.registerDate) + "</td></tr>");
             }); 
         }
     });

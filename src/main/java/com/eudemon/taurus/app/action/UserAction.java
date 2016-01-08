@@ -47,6 +47,21 @@ public class UserAction {
 		return "index";
 	}
 	
+	@RequestMapping(value = "detail")
+	public void detail(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		int id = RequestUtils.getParameterAsInt(request, "id", 0);
+		Log.getDebugLogger().trace("UserAction.detail.parameter[id=" + id + "]");
+		
+		User user = null;
+		try {
+			user = this.userService.getUserById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		JasonUtils.writeJasonP(request, response, user);
+	}
+	
 	@RequestMapping(value = "list")
 	public void list(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		Log.getDebugLogger().trace("UserAction.list");

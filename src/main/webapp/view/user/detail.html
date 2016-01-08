@@ -10,8 +10,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="a.css">
+    <link rel="stylesheet" href="../../static/common/base.css">
+    <link rel="stylesheet" href="list.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,12 +49,34 @@
 			<div class="clearfix visible-xs-block"></div>
 			<div class="col-md-10">
 				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">Panel heading</div>
+					<div class="panel-heading">用户详情</div>
+					
 					<div class="panel-body">
-						<p>...</p>
+						<form class="form-horizontal">
+							<div class="form-group row" style="padding-top: 10px;">
+								<div class="col-md-2 control-label" >用户名</div>
+								<div class="col-md-8"><input type="text" class="form-control" disabled="disabled" id="name"></div>
+								<div class="col-md-2"></div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-2 control-label" >角色</div>
+								<div class="col-md-8">
+									<select class="form-control">
+										<option>普通用户</option>
+										<option>管理员</option>
+									</select>
+								</div>
+								<div class="col-md-2"></div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-2 control-label" >描述</div>
+								<div class="col-md-8"><textarea class="form-control" rows="3"></textarea></div>
+								<div class="col-md-2"></div>
+							</div>
+		
+							<div class="row"><div class="col-md-6"></div><div class="col-md-6"><button type="submit" class="btn btn-default">修改</button></div></div>
+						</form>
 					</div>
-					<table class="table table-bordered"></table>
 				</div>
 			</div>
 		</div>
@@ -67,6 +89,6 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="a.js"></script>
+    <script src="detail.js"></script>
   </body>
 </html>
