@@ -58,6 +58,25 @@ public class UserDaoImpl extends SpringJdbcBaseDao<User> implements UserDao {
 		String sql = "select * from user order by id asc limit ?,?";
 		return queryForList(sql, start, end - start);
 	}
+
+	@Override
+	public long save(final User user) {
+		String sql = new String("insert into user(name, password, password_encrypt, salt, roles, permissions) values(?,?,?,?,?,?)");
+		return saveOnGeneratedKey(sql, user.getName(), user.getPassword(), user.getPasswordEncrypt(), user.getSalt(), user.getRoles(), user.getPermissions());
+	}
+	
+	@Override
+	public boolean delete(long id) {
+		String sql = "delete from user where id=?";
+		return save(sql, id);
+	}
+
+	@Override
+	public boolean update(User t) {
+		String sql = "update debate set name=?, password=?, password_encrypt=?, salt=?, roles=?, permissions=? where id=?";
+		boolean rs = this.save(sql, t.getName(), t.getPassword(), t.getPasswordEncrypt(), t.getSalt(), t.getRoles(), t.getPermissions());
+		return rs;
+	}
 	
 	@Override
 	public byte[] queryPhoto(final int id) {
@@ -86,24 +105,6 @@ public class UserDaoImpl extends SpringJdbcBaseDao<User> implements UserDao {
 		}
 		
 		return null;
-	}
-
-	@Override
-	public long save(final User user) {
-		String sql = new String("insert into user(name, password, password_encrypt, salt, roles, permissions) values(?,?,?,?,?,?)");
-		return saveOnGeneratedKey(sql, user.getName(), user.getPassword(), user.getPasswordEncrypt(), user.getSalt(), user.getRoles(), user.getPermissions());
-	}
-	
-	@Override
-	public boolean delete(long id) {
-		String sql = "delete from user where id=?";
-		return save(sql, id);
-	}
-
-	@Override
-	public boolean update(User t) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	@Override

@@ -84,4 +84,9 @@ public class UserService {
 			return null;
 		}
 	}
+
+	public boolean modify(int id, String role) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

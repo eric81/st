@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eudemon.taurus.app.common.Log;
+import com.eudemon.taurus.app.entity.OperResult;
 import com.eudemon.taurus.app.entity.User;
 import com.eudemon.taurus.app.service.UserService;
 import com.eudemon.taurus.app.util.JasonUtils;
@@ -87,6 +88,22 @@ public class UserAction {
 		}else{
 			return "fail";
 		}
+	}
+	
+	@RequestMapping(value = "modify")
+	public void modify(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		int id = RequestUtils.getParameterAsInt(request, "id", 0);
+		String role = request.getParameter("role");
+		Log.getDebugLogger().trace("UserAction.delete.parameter[id=" + id + "role=" + role + "]");
+		
+		OperResult or = new OperResult();
+		boolean rs = this.userService.modify(id, role);
+		if(!rs){
+			or.setCode(OperResult.CODE_FAIL);
+			or.setMessage("fail");
+		}
+		
+		JasonUtils.writeJasonP(request, response, or);
 	}
 	
 	@RequestMapping(value = "uploadPhoto")
