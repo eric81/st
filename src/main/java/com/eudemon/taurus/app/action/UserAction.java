@@ -1,6 +1,8 @@
 package com.eudemon.taurus.app.action;
 
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,8 +95,8 @@ public class UserAction {
 	@RequestMapping(value = "modify")
 	public void modify(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		int id = RequestUtils.getParameterAsInt(request, "id", 0);
-		String role = request.getParameter("role");
-		Log.getDebugLogger().trace("UserAction.delete.parameter[id=" + id + "role=" + role + "]");
+		String role = RequestUtils.getParameterAndTrimDecode(request, "role", "utf-8");
+		Log.getDebugLogger().trace("UserAction.modify.parameter[id=" + id + " role=" + role + "]");
 		
 		OperResult or = new OperResult();
 		boolean rs = this.userService.modify(id, role);
@@ -103,6 +105,7 @@ public class UserAction {
 			or.setMessage("fail");
 		}
 		
+		Log.getDebugLogger().trace("UserAction.modify.parameter[id=" + id + " role=" + role + "] rs=" + or);
 		JasonUtils.writeJasonP(request, response, or);
 	}
 	

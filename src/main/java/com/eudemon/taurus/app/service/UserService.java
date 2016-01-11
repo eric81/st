@@ -75,7 +75,7 @@ public class UserService {
 		}
 	}
 	
-	public byte[] getPhoto(int id){ 
+	public byte[] getPhoto(int id){
 		try {
 			byte[] rs = userDao.queryPhoto(id);
 			return rs;
@@ -84,9 +84,12 @@ public class UserService {
 			return null;
 		}
 	}
-
+	
+	@Transactional(readOnly = false)
 	public boolean modify(int id, String role) {
-		// TODO Auto-generated method stub
-		return false;
+		User user = userDao.query(id);
+		user.setRoles(role);
+		boolean rs = userDao.update(user);
+		return rs;
 	}
 }

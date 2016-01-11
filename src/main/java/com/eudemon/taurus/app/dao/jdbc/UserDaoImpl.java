@@ -73,8 +73,15 @@ public class UserDaoImpl extends SpringJdbcBaseDao<User> implements UserDao {
 
 	@Override
 	public boolean update(User t) {
-		String sql = "update debate set name=?, password=?, password_encrypt=?, salt=?, roles=?, permissions=? where id=?";
-		boolean rs = this.save(sql, t.getName(), t.getPassword(), t.getPasswordEncrypt(), t.getSalt(), t.getRoles(), t.getPermissions());
+		String sql = "update user set name=?, password=?, password_encrypt=?, salt=?, roles=?, permissions=? where id=?";
+		boolean rs = false;
+		try {
+			rs = this.save(sql, t.getName(), t.getPassword(), t.getPasswordEncrypt(), t.getSalt(), t.getRoles(), t.getPermissions(), t.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.getErrorLogger().error("user update fail user=" + t, e);
+		}
 		return rs;
 	}
 	
