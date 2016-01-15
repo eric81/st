@@ -23,4 +23,9 @@
 	<!-- 排除，不进行装饰的路径 -->
 	<mapping path="/static/*" exclue="true" />
 	<mapping path="/api/*" exclue="true" />
+	
+	<!-- 自定义标签 -->
+    <content-processor>
+       <tag-rule-bundle class="com.eudemon.taurus.app.util.JsFooterIncludeTagRuleBundle" />
+    </content-processor>
 </sitemesh>

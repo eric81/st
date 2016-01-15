@@ -10,8 +10,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     
-    <link rel="stylesheet" href="../../static/common/base.css">
-    <link rel="stylesheet" href="list.css">
+    <link rel="stylesheet" href="/st/view/common/css/base.css">
+    <link rel="stylesheet" href="/st/view/framemanage/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,10 +19,7 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
+
     <sitemesh:write property='head'/>
   </head>
   <body>
@@ -55,15 +52,22 @@
 			<div class="col-md-10">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
+					<div class="panel-heading"><sitemesh:write property="title"/></div>
 					<sitemesh:write property='body'/>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<br><br><br>
+	
 
 	<div class="container-fluid navbar-fixed-bottom footer">
 		Copyright &copy; 2000 - 2015 XINHUANET.com All Rights Reserved. 制作单位：新华网 版权所有 新华网
   	</div>
+  	
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  	<sitemesh:write property='jsIncludeFooter'/>
   </body>
 </html>
