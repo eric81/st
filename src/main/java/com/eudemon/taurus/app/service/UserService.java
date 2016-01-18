@@ -36,11 +36,11 @@ public class UserService {
 	}
 
 	public List<User> getAllUser() {
-		return userDao.queryAll();
+		return userDao.queryList();
 	}
 
 	public List<User> getUserList(int start, int end) {
-		return userDao.queryListByScope(start, end);
+		return userDao.queryList(start, end);
 	}
 	
 	@Transactional(readOnly = false)

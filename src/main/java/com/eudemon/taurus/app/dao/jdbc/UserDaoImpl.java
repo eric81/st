@@ -42,33 +42,42 @@ public class UserDaoImpl extends SpringJdbcBaseDao<User> implements UserDao {
 	}
 	
 	@Override
-	public List<User> queryAll() {
-		String sql = "select * from user";
-		return queryForList(sql);
-	}
-
-	@Override
-	public User queryByName(String userName) {
-		String sql = "select * from user where name=?";
-		return queryForObject(sql, userName);
-	}
-	
-	@Override
-	public List<User> queryListByScope(int start, int end) {
-		String sql = "select * from user order by id asc limit ?,?";
-		return queryForList(sql, start, end - start);
-	}
-
-	@Override
 	public long save(final User user) {
 		String sql = new String("insert into user(name, password, password_encrypt, salt, roles, permissions) values(?,?,?,?,?,?)");
-		return saveOnGeneratedKey(sql, user.getName(), user.getPassword(), user.getPasswordEncrypt(), user.getSalt(), user.getRoles(), user.getPermissions());
+		long id = saveOnGeneratedKey(sql, user.getName(), user.getPassword(), user.getPasswordEncrypt(), user.getSalt(),
+				user.getRoles(), user.getPermissions());
+		return id;
 	}
 	
 	@Override
 	public boolean delete(long id) {
 		String sql = "delete from user where id=?";
 		return save(sql, id);
+	}
+	
+	@Override
+	public List<User> queryList() {
+		String sql = "select * from user";
+		return queryForList(sql);
+	}
+	
+	@Override
+	public List<User> queryList(int start, int size) {
+		String sql = "select * from user order by id asc limit ?,?";
+		return queryForList(sql, start, size);
+	}
+	
+	@Override
+	public int count() {
+		String sql = "select count(*) from user";
+		int count = this.jdbcTemplate.queryForObject(sql, Integer.class);
+		return count;
+	}
+
+	@Override
+	public User queryByName(String userName) {
+		String sql = "select * from user where name=?";
+		return queryForObject(sql, userName);
 	}
 
 	@Override
@@ -78,8 +87,6 @@ public class UserDaoImpl extends SpringJdbcBaseDao<User> implements UserDao {
 		try {
 			rs = this.save(sql, t.getName(), t.getPassword(), t.getPasswordEncrypt(), t.getSalt(), t.getRoles(), t.getPermissions(), t.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			Log.getErrorLogger().error("user update fail user=" + t, e);
 		}
 		return rs;
