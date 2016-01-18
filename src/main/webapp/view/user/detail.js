@@ -18,7 +18,7 @@ $(function() {
 
 function userDetail(userid, callback){
     $.ajax({
-        url : "http://localhost/st/user/detail",
+        url : "/user/detail",
         type : 'POST',
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
         dataType : "jsonp",
@@ -35,7 +35,7 @@ function userDetail(userid, callback){
 
 function userModify(userid, userRole){
     $.ajax({
-        url : "http://localhost/st/user/modify",
+        url : "/user/modify",
         type : 'POST',
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
         dataType : "jsonp",

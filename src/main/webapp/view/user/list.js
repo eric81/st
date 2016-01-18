@@ -4,7 +4,7 @@ $(function() {
 
 function userlist(){
     $.ajax({
-        url : "http://localhost/st/user/list",
+        url : "/user/list",
         type : 'POST',
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
         dataType : "jsonp",
