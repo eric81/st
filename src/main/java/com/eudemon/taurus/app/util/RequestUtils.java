@@ -64,7 +64,7 @@ public class RequestUtils {
 		String result = req.getParameter(param);
 		result = result != null ? result.trim() : "";
 		try {
-			result = URLDecoder.decode(req.getParameter("role"), encoding);
+			result = URLDecoder.decode(result, encoding);
 		} catch (UnsupportedEncodingException e) {
 			Log.getErrorLogger().warn("getParameterAndTrimDecode UnsupportedEncodingException msg=" + e.getMessage());
 		}
