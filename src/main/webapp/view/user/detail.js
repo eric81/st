@@ -4,7 +4,8 @@ id=url[1];
 $(function() {
     $("#modifyBtn").click(function() {
     	var role = $("#roleselect option:selected").text();
-    	userModify(id, role);
+    	//userModify(id, role);
+    	vote();
 	});
     
 	userDetail(id, function(data){
@@ -43,6 +44,28 @@ function userModify(userid, userRole){
         data : {
         	id: userid,
         	role : encodeURIComponent(userRole)
+        },
+        cache : false,
+        success : function(rs) {
+        	location.reload();
+        },
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest.status);
+			alert(XMLHttpRequest.readyState);
+			alert(textStatus);
+		}
+    });
+}
+
+function vote(){
+    $.ajax({
+        url : "/tt/vote1",
+        type : 'POST',
+        contentType : "application/x-www-form-urlencoded; charset=utf-8",
+        dataType : "json",
+        async : false,
+        data : {
+        	code: "jssw",
         },
         cache : false,
         success : function(rs) {
