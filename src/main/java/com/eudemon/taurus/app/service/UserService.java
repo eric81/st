@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eudemon.taurus.app.dao.UserDao;
+import com.eudemon.taurus.app.entity.PagedEntity;
 import com.eudemon.taurus.app.entity.User;
 
 @Component
@@ -19,35 +20,7 @@ import com.eudemon.taurus.app.entity.User;
 public class UserService {
 	@Autowired
 	private UserDao userDao;
-
-	public User findUserByName(String loginName) {
-		User us = userDao.queryByName(loginName);
-		return us;
-	}
-
-	@Transactional(readOnly = false)
-	public void registerUser(User user) {
-		user.setRoles("user");
-		user.setPermissions("read");
-		user.setRegisterDate(new Timestamp(new Date().getTime()));
-
-		long id = userDao.save(user);
-		user.setId((int) id);
-	}
-
-	public List<User> getAllUser() {
-		return userDao.queryList();
-	}
-
-	public List<User> getUserList(int start, int end) {
-		return userDao.queryList(start, end);
-	}
 	
-	@Transactional(readOnly = false)
-	public boolean delete(long id){
-		return userDao.delete(id);
-	}
-
 	public User getUserById(int id) {
 		User user = null;
 		try {
@@ -65,7 +38,46 @@ public class UserService {
 		}
 		return user;
 	}
+	
+	public List<User> getAllUser() {
+		List<User> rs = userDao.queryList();
+		
+		return rs;
+	}
 
+	public PagedEntity<User> getPagedUserList(int pageNo, int pageSize) {
+		int start = (pageNo - 1) * pageSize;
+		int size = pageSize;
+		List<User> userList = userDao.queryList(start, size);
+		int count = userDao.count();
+		
+		PagedEntity<User> rs = new PagedEntity<User>(pageNo, pageSize, count, userList);
+		return rs;
+	}
+	
+	@Transactional(readOnly = false)
+	public void registerUser(User user) {
+		user.setRoles("user");
+		user.setPermissions("read");
+		user.setRegisterDate(new Timestamp(new Date().getTime()));
+
+		long id = userDao.save(user);
+		user.setId((int) id);
+	}
+	
+	@Transactional(readOnly = false)
+	public boolean delete(long id){
+		return userDao.delete(id);
+	}
+	
+	@Transactional(readOnly = false)
+	public boolean modify(int id, String role) {
+		User user = userDao.query(id);
+		user.setRoles(role);
+		boolean rs = userDao.update(user);
+		return rs;
+	}
+	
 	@Transactional(readOnly = false)
 	public void updatePhoto(int id, MultipartFile file) {
 		try {
@@ -83,13 +95,5 @@ public class UserService {
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-	@Transactional(readOnly = false)
-	public boolean modify(int id, String role) {
-		User user = userDao.query(id);
-		user.setRoles(role);
-		boolean rs = userDao.update(user);
-		return rs;
 	}
 }

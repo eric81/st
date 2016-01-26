@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eudemon.taurus.app.common.Log;
 import com.eudemon.taurus.app.entity.OperResult;
+import com.eudemon.taurus.app.entity.PagedEntity;
 import com.eudemon.taurus.app.entity.User;
 import com.eudemon.taurus.app.service.UserService;
 import com.eudemon.taurus.app.util.JasonUtils;
@@ -67,16 +68,21 @@ public class UserAction {
 	
 	@RequestMapping(value = "list")
 	public void list(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-		Log.getDebugLogger().trace("UserAction.list");
+		int page = RequestUtils.getParameterAsInt(request, "pg", 1);
+		int pageSize = RequestUtils.getParameterAsInt(request, "ps", 10);
+		Log.getDebugLogger().trace("UserAction.list.parameter[page=" + page + ",pageSize=" + pageSize + "]");
+		if(page < 1){
+			page = 1;
+		}
 		
-		List<User> list = null;
+		PagedEntity<User> rs = null;
 		try {
-			list = this.userService.getAllUser();
+			rs = this.userService.getPagedUserList(page, pageSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		JasonUtils.writeJasonP(request, response, list);
+		JasonUtils.writeJasonP(request, response, rs);
 	}
 	
 	@RequestMapping(value = "delete")

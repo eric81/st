@@ -1,8 +1,19 @@
+var url = window.location.search.substring(1).split('=');
+var page = url[1];
+
 $(function() {
-	userlist();
+	if(page == null){
+		page = 1;
+	}
+	if(page < 1){
+		location.href = "list.html"
+	}
+	
+	userlist(page, 10);
+	showPager(page);
 });
 
-function userlist(){
+function userlist(page, pageSize){
     $.ajax({
         url : "/user/list",
         type : 'POST',
@@ -10,17 +21,25 @@ function userlist(){
         dataType : "jsonp",
         async : false,
         data : {
-        	
+        	pg : page,
+        	ps : pageSize
         },
         cache : false,
         success : function(data) {
             $(".table").html("");
             $(".table").append("<tr><td>用户</td><td>角色</td><td>权限</td><td>注册日期</td></tr>");
-            $.each(data, function(index, user) {
+            $.each(data.entities, function(index, user) {
                 $(".table").append("<tr><td><a href='detail.html?id=" + user.id + "'>" + user.name + "</a></td><td>" + user.roles + "</td><td>" + user.permissions + "</td><td>" + formatTime(user.registerDate) + "</td></tr>");
             }); 
         }
     });
+}
+
+function showPager(page){
+	$(".pagination").html("");
+	$(".pagination").append("<li><a href='list.html?pg=" + (page*1 - 1) + "' aria-label='Previous'> <spanaria-hidden='true'>&laquo;</span></a></li>");
+	$(".pagination").append("<li class='active'><a href='list.html?pg=1'>1</a></li>");
+	$(".pagination").append("<li><a href='list.html?pg=" + (page*1 + 1) + "' aria-label='Next'> <spanaria-hidden='true'>&raquo;</span></a></li>");
 }
 
 function formatTime(obj, IsMi) {
