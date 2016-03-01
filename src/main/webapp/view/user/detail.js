@@ -4,8 +4,8 @@ id=url[1];
 $(function() {
     $("#modifyBtn").click(function() {
     	var role = $("#roleselect option:selected").text();
-    	//userModify(id, role);
-    	vote();
+    	userModify(id, role);
+    	//vote();
 	});
     
 	userDetail(id, function(data){
