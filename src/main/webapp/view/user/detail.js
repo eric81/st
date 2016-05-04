@@ -47,7 +47,10 @@ function userModify(userid, userRole){
         },
         cache : false,
         success : function(rs) {
-        	location.reload();
+        	if(rs.code == 200){
+        		alert("user modify success");
+        		location.reload();	
+        	}
         },
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest.status);
