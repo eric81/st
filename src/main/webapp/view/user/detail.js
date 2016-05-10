@@ -15,6 +15,7 @@ $(function() {
 		$("#name").attr("value", data.name);
 		$("#roleselect").find("option[value='"+data.roles+"']").attr("selected", true);
 		$("#userHeader").attr("src", "/user/viewPhoto?id=" + data.id);
+		$("#upphoto").attr("action", "/user/uploadPhoto?id=" + data.id + "&name=" + data.name + "&v=/view/user/detail.html?id=" + data.id);
 	});
 });
 

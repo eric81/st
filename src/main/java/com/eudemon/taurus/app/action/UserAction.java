@@ -119,12 +119,18 @@ public class UserAction {
 	public String uploadPhoto(HttpServletRequest request, @RequestParam("userfile") MultipartFile file, ModelMap model)
 			throws Exception {
 		int id = RequestUtils.getParameterAsInt(request, "id", 0);
-		String name = request.getParameter("name");
+		String view = RequestUtils.getParameterAndTrim(request, "v");
+		String name = RequestUtils.getParameterAndTrim(request, "name");
+		
 		Log.getDebugLogger().trace("UserAction.uploadPhoto.parameter[id=" + id + ",name=" + name + "]");
 		
 		userService.updatePhoto(id, file);
 		
-		return "forward:/user/query?name=" + name;
+		if(null != view && !view.equals("")){
+			return "redirect:" + view;
+		}else{
+			return "forward:/user/query?name=" + name;
+		}
 	}
 	
 	@RequestMapping(value = "viewPhoto")
