@@ -4,7 +4,11 @@ id=url[1];
 $(function() {
     $("#modifyBtn").click(function() {
     	var role = $("#roleselect option:selected").text();
-    	userModify(id, role);
+        var permissions = "";
+        $('input[name="permissions"]:checked').each(function() {
+        	permissions += $(this).val();
+        });
+    	userModify(id, role, permissions);
     	//vote();
 	});
     
@@ -36,7 +40,7 @@ function userDetail(userid, callback){
     });
 }
 
-function userModify(userid, userRole){
+function userModify(userid, userRole, permissions){
     $.ajax({
         url : "/user/modify",
         type : 'POST',
@@ -45,7 +49,8 @@ function userModify(userid, userRole){
         async : false,
         data : {
         	id: userid,
-        	role : encodeURIComponent(userRole)
+        	role : encodeURIComponent(userRole),
+        	pm:encodeURIComponent(permissions)
         },
         cache : false,
         success : function(rs) {

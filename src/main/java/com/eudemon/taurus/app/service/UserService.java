@@ -71,9 +71,10 @@ public class UserService {
 	}
 	
 	@Transactional(readOnly = false)
-	public boolean modify(int id, String role) {
+	public boolean modify(int id, String role, String permissions) {
 		User user = userDao.query(id);
 		user.setRoles(role);
+		user.setPermissions(permissions);
 		boolean rs = userDao.update(user);
 		return rs;
 	}

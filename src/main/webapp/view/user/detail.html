@@ -15,6 +15,7 @@
 				<select class="form-control" id="roleselect">
 					<option value="user">user</option>
 					<option value="admin">admin</option>
+					<option value="版主">版主</option>
 				</select>
 			</div>
 			<div class="col-md-2"></div>
@@ -27,11 +28,14 @@
 					     			<p class="help-block">请点下面的按键选择您要上传的图片(图片尺寸：<b><font color=red>200</font> </b> X <b><font
 						color=red>150</font> </b>象素，<font color=red><b>30K</b> </font>字节以内)</p>
 				<input type="file" class="" id="f" value="更换头像" name="userfile">
-				<input type="submit" class="" name="submit" value="上个传">
+				<input type="submit" class="" name="submit" value="上传">
 			</div>
 			<div class="col-md-1 control-label">权限</div>
 			<div class="col-md-3">
-				<textarea class="form-control" rows="11"></textarea>
+				<input type="checkbox" name="permissions" value="用户管理,">用户管理
+				<input type="checkbox" name="permissions" value="帖子管理,">帖子管理
+				<input type="checkbox" name="permissions" value="投票管理,">投票管理
+				<input type="checkbox" name="permissions" value="版面管理,">版面管理
 			</div>
 		</div>
 		<div class="form-group row">
