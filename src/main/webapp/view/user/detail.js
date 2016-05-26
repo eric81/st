@@ -67,24 +67,17 @@ function userModify(userid, userRole, permissions){
     });
 }
 
-function vote(){
-    $.ajax({
-        url : "/tt/vote1",
-        type : 'POST',
-        contentType : "application/x-www-form-urlencoded; charset=utf-8",
-        dataType : "json",
-        async : false,
-        data : {
-        	code: "jssw",
-        },
-        cache : false,
-        success : function(rs) {
-        	location.reload();
-        },
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			alert(XMLHttpRequest.status);
-			alert(XMLHttpRequest.readyState);
-			alert(textStatus);
+//图片上传和预览
+function preview(file){
+	var prevDiv = document.getElementById('userHeader');
+	if (file.files && file.files[0]){
+		var reader = new FileReader();
+		reader.onload = function(evt){
+			prevDiv.setAttribute("src", evt.target.result); 
 		}
-    });
+		reader.readAsDataURL(file.files[0]);
+	}else{
+		prevDiv.innerHTML = '<div class="img"'
+		+ 'style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+	}
 }
